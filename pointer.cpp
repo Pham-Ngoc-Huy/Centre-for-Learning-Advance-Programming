@@ -11,5 +11,7 @@ int main(){
     p = &a;
     cout << a <<endl;
     cout << a1 <<endl;
-    cout << *p <<endl;
+    cout << p << endl; // address of a 
+    cout << &p << endl;// address of p
+    cout << *p <<endl; // content of a 
 }
