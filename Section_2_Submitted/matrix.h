@@ -1,10 +1,13 @@
 #ifndef _FUNCTION_MATRIX_
 #define _FUNCTION_MATRIX_
 
-void add(const double**& A, const int& numRowsA, const int& numColsA, const double**& B, const int& numRowsB, const int& numColsB, double**& C, int& numRowsC, int& numColsC);
-void mult(const double**& E, const int& numRowsE, const int& numColsE, const double*& w,  const int& sizeW, double*& t, int& sizeT);
+#include <string> 
+using std::string;
+void add(double**& A, const int& numRowsA, const int& numColsA, double**& B, const int& numRowsB, const int& numColsB, double**& C, int& numRowsC, int& numColsC);
+void mult(double**& A, const int& numRowsA, const int& numColsA, double**& B, const int& numRowsB, const int& numColsB, double**& D, int& numRowsD, int& numColsD);
 double** allocate(const int& numCols, const int& numRows);
 void deallocate(double** v, const int& numRows);
-void print(const double** v, const int& numRows, const int& numCols, const string& name);
-void random(int** matrix, int rows, int cols);
+void print(double** v, const int& numRows, const int& numCols, string name);
+void random(double** v, int& numRows, int& numCols);
+void zeros(double**& C, int numRowsC, int numColsC);
 #endif

@@ -1,10 +1,13 @@
 #include <iostream>
 #include "vector.h"
 #include <cstdlib>
+#include <cstring>
+#include <string>
+
 using namespace std;
 
 // same size before adding
-void add(const double*& v1, const int& sizeV1, const double*& v2, const int& sizeV2, double*& w, int& sizeW)
+void add(double*& v1, const int& sizeV1, double*& v2, const int& sizeV2, double*& w, int& sizeW)
 {
     if (sizeV1 == sizeV2)
     {
@@ -21,7 +24,7 @@ void add(const double*& v1, const int& sizeV1, const double*& v2, const int& siz
 
 }
 // same size before multiply
-void mult(const double**& E, const int& numRowsE, const int& numColsE, const double*& w,  const int& sizeW, double*& t, int& sizeT)
+void mult(double**& E, const int& numRowsE, const int& numColsE, double*& w,  const int& sizeW, double*& t, int& sizeT)
 {
     if (numColsE == sizeW){
         cout<<"The Correct Size of Matrix compared with Vector"<<endl;
@@ -32,9 +35,6 @@ void mult(const double**& E, const int& numRowsE, const int& numColsE, const dou
             for(int j = 0; j < numColsE; ++j){
                 t[i] += E[i][j] * w[j];
             }
-        }
-        for(int i = 0; i < numRowsE; ++i){
-            
         }
     }
     else{
@@ -49,15 +49,29 @@ double* allocate(const int& numCols)
     return v;
 }
 
+void random(double* v, int& numRows) {
+    v = new double[numRows];
+    for (int i = 0; i < numRows; ++i) {
+        v[i] = rand() % 50; 
+    }
+}
+
 void deallocate(double* v)
 {
 delete [] v;
 }
 
-void print(const double* v, const int& size , string name)
+void print(double* v, const int& size , string name)
 {
     cout << "Vector␣" << name << ":␣" << endl;
     for (int j = 0; j < size; ++j)
         cout << v[j] << ",␣";
         cout << endl;
+}
+
+void zeros(double*& w, int sizeW) {
+    // Allocate memory for the array
+    w = new double[sizeW];
+    // Initialize all elements to zero
+    std::memset(w, 0, sizeW * sizeof(double));
 }

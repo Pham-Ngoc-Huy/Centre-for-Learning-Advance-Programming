@@ -1,10 +1,12 @@
 #include <iostream>
-#include "matrix.h"
 #include <cstdlib>
+#include "matrix.h"
+#include <cstring>
+#include <string>
 using namespace std;
 
 // same size before adding
-void add(const double**& A, const int& numRowsA, const int& numColsA, const double**& B, const int& numRowsB, const int& numColsB, double**& C, int& numRowsC, int& numColsC)
+void add(double**& A, const int& numRowsA, const int& numColsA, double**& B, const int& numRowsB, const int& numColsB, double**& C, int& numRowsC, int& numColsC)
 {
     if (numRowsA == numRowsB && numColsA == numColsB)
     {
@@ -29,7 +31,7 @@ void add(const double**& A, const int& numRowsA, const int& numColsA, const doub
 
 }
 // same size before multiply
-void mult(const double**& A, const int& numRowsA, const int& numColsA, const double**& B, const int& numRowsB, const int& numColsB, double**& D, int& numRowsD, int& numColsD)
+void mult(double**& A, const int& numRowsA, const int& numColsA,  double**& B, const int& numRowsB, const int& numColsB, double**& D, int& numRowsD, int& numColsD)
 {
     if (numColsA == numRowsB) {
         cout << "The Correct Size of Matrix." << endl;
@@ -66,22 +68,6 @@ double** allocate(const int& numCols, const int& numRows)
     return v;
 }
 
-void deallocate(double** v, const int& numRows) {
-    for (int i = 0; i < numRows; ++i) {
-        delete[] v[i];
-    }
-    delete[] v; }
-
-void print(const double** v, const int& numRows, const int& numCols, const string& name) {
-    cout << "Matrix " << name << ":" << endl;
-    for (int i = 0; i < numRows; ++i) {
-        for (int j = 0; j < numCols; ++j) {
-            cout << v[i][j] << " ";
-        }
-        cout << endl;
-    }
-    cout << endl;
-}
 void random(double** v, int& numRows, int& numCols) {
     v = new double*[numRows];
     for (int i = 0; i < numCols; ++i) {
@@ -91,5 +77,34 @@ void random(double** v, int& numRows, int& numCols) {
         for (int j = 0; j < numCols; ++j) {
             v[i][j] = rand() % 50; 
         }
+    }
+}
+
+void deallocate(double** v, const int& numRows) {
+    for (int i = 0; i < numRows; ++i) {
+        delete[] v[i];
+    }
+    delete[] v; 
+}
+
+void print(double** v, const int& numRows, const int& numCols, string name) 
+{
+    cout << "Matrix " << name << ":" << endl;
+    for (int i = 0; i < numRows; ++i) {
+        for (int j = 0; j < numCols; ++j) {
+            cout << v[i][j] << " ";
+        }
+        cout << endl;
+    }
+    cout << endl;
+}
+
+void zeros(double**& C, int numRowsC, int numColsC) {
+    // Allocate memory for the array
+    C = new double*[numRowsC];
+    for (int i = 0; i < numRowsC; ++i) {
+        C[i] = new double[numColsC];
+        // Initialize each row to zeros
+        std::memset(C[i], 0, numColsC * sizeof(double));
     }
 }
