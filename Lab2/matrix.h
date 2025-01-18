@@ -3,18 +3,25 @@
 #include <iostream>
 #include <cassert>
 #include <string>
+#include "vector.h"
+
 using namespace std;
 class Matrix{
 
 private:
-    //member data:
+    // //member data:
+    // int rows;
+    // int cols;
+    // double** entry;
+    void allocate();
+    void deallocate();
+
+public:
     int rows;
     int cols;
     double** entry;
-    void allocate();
-    void deallocate();
+
  
-public:
     //constructor and  destructor
     Matrix(const int& r, const int& c);
     Matrix(const int& r, const int& c, const double& val);
@@ -26,19 +33,20 @@ public:
     int getCols() const;
     double getEntry(const int& rInd, const int& cInd) const;
     void setEntry(const int& rInd, const int& cInd, const double& val);
+    void zeros();
     void ones();
     void eye();
-
     void random();
-    void zeros();
     void print(string name) const;
-
 
     // entry access:
     double& operator() (const int& rInd, const int&cInd) const;
+
     // member operations:
     //A = B
     Matrix& operator=(const Matrix& mat);
+    //A = -B
+    Matrix operator-() const;
     // ++A
     Matrix& operator++();
     // A += B
@@ -55,12 +63,10 @@ public:
     Matrix operator*(const double& alp);
     //C = A*B
     Matrix operator*(const Matrix& mat);
-    // B= transpose(A)
-    Matrix transpose(const Matrix& mat);
-
-
-
+    // matrix * vector
+    Vector operator*(const Vector& vec);
 };
-
+// B= transpose(A)
+Matrix transpose(const Matrix& mat);
 
 #endif

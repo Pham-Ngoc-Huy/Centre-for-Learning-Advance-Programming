@@ -3,6 +3,7 @@
 #include <string>
 #include <cstdio>
 #include "matrix.h"
+#include "vector.h"
 
 using namespace std;
 
@@ -44,17 +45,7 @@ void Matrix::eye() {
         }
     }
 }
-Matrix Matrix::transpose(const Matrix& math) {
-    int rows = math.rows;    
-    int cols = math.cols;    
-    Matrix B(cols, rows);  
-    for (int i = 0; i < rows; i++) {
-        for (int j = 0; j < cols; j++) {
-            B(j, i) = math.entry[i][j];  
-        }
-    }
-    return B; 
-}
+
 Matrix::Matrix(const int& r, const int& c){
     // initialize rows and cols
     rows = r;
@@ -94,7 +85,6 @@ void Matrix::print(string name) const{
         cout << endl;
      }
 }
-
 // operator
 double Matrix::getEntry(const int& rInd, const int& cInd) const{
     assert(rInd > -1 && rInd < rows);
@@ -150,11 +140,14 @@ Matrix Matrix::operator-(const Matrix& mat){
     return C;
 }
 Matrix& Matrix::operator=(const Matrix& mat) {
-    rows = mat.rows;
-    cols = mat.cols;
+    if (rows != mat.rows || cols != mat.cols) {
+        cout<<"Matrix assignment error: Dimension mismatch"<<endl;
+        return *this;
+    }
+
     for (int i = 0; i < rows; i++) {
         for (int j = 0; j < cols; j++) {
-            entry[i][j] = mat.entry[i][j];
+            entry[i][j] = mat(i,j);
         }
     }
 
@@ -233,5 +226,47 @@ Matrix Matrix::operator*(const double& alp){
             }
         }
     return C;
+}
+
+Vector Matrix::operator*(const Vector& vec) {
+    if (this->cols != vec.getSize()) {  // Ensure dimension compatibility
+        cout << "Matrix-vector multiplication is mismatch dimension"<<endl;
+        return Vector(this->rows);     
+    }
+    int r = this->rows;
+    int c = this->cols;
+    Vector C(r); 
+
+    for (int i = 0; i < r; i++) {
+        double sum = 0;
+        for (int j = 0; j < c; j++) {
+            sum += this->entry[i][j] * vec.getEntry(j);
+        }
+        C.setEntry(i,sum);
+    }
+    return C;
+}
+
+Matrix Matrix::operator-() const {
+    Matrix A(this->rows, this->cols);
+
+    for (int i = 0; i < this->rows; i++) {
+        for (int j = 0; j < this->cols; j++) {
+            A.entry[i][j] = -(this->entry[i][j]);  
+        }
+    }
+    return A;  
+}
+
+Matrix transpose(const Matrix& mat) {
+    int rows = mat.rows;    
+    int cols = mat.cols;    
+    Matrix B(cols, rows);  
+    for (int i = 0; i < rows; i++) {
+        for (int j = 0; j < cols; j++) {
+            B(j, i) = mat.entry[i][j];  
+        }
+    }
+    return B; 
 }
 
