@@ -11,13 +11,7 @@ double** allocate(int& numRows, int& numCols) {
         v[i] = new double[numCols];
     }
     return v;
-}
-void allocate(double** v, int& numRows, int& numCols){
-    v = new double*[numRows];
-    for (int i = 0; i < numRows; i++) {
-        v[i] = new double[numCols];
-    }
-}
+} //truely return a pointer - not just and reference
 
 void deallocate(double** v, int& numRows) {
     for (int i = 0; i < numRows; i++) {
