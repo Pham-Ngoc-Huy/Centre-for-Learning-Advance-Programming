@@ -38,7 +38,7 @@ int SquareMatrix::getSize() const{
 bool SquareMatrix::islowTri() const{
     for (int i = 0; i < size; i++){
         for (int j = i + 1; j < size; j++){
-            if (entry[i][j] == 0){
+            if (entry[i][j] != 0){
                 return false;
             }
         }
@@ -47,7 +47,7 @@ bool SquareMatrix::islowTri() const{
 }
 
 bool SquareMatrix::isupTri() const{
-    for (int i = 1; i < size; i++){
+    for (int i = 0; i < size; i++){
         for (int j = 0; j < i; j++){
             if (entry[i][j] != 0){
                 return false;

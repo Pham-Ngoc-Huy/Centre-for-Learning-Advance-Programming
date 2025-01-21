@@ -54,8 +54,12 @@ int main(){
     // otherwise return run-time error
     MatrixDoubleLowTri L3(5);
     L3.zeros();
-    L3.random();
+
+    L1.print("L1 Before Addition");
+    L2.print("L2 Before Addition");
+
     L3 = L1 + L2;
-    // L3 = L1 + S1; // should return errors
+    // // L3 = L1 + S1; // should return errors
     L3.print("L3");
+
 }

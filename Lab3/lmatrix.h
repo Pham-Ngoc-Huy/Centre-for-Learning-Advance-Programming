@@ -23,7 +23,6 @@ class MatrixDoubleLowTri: public SquareMatrix{
         MatrixDoubleLowTri& operator+=(const Matrix &mat);
         MatrixDoubleLowTri& operator=(const Matrix &mat);
 
-
     } 
  
 

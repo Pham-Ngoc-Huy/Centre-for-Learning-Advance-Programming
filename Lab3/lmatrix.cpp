@@ -40,12 +40,12 @@ void MatrixDoubleLowTri::ones(){
 }
 
 void MatrixDoubleLowTri::random(){
-    for (int i = 0; i < rows; i++) {
-        for (int j = 0; j < cols; j++) {
+    for (int i = 0; i < size; i++) {
+        for (int j = 0; j < size; j++) {
             if (i < j)
-                mat[i][j] =0;
+                entry[i][j] =0;
             else
-                mat[i][j] = 1 + rand() % 10;
+                entry[i][j] = 1 + rand() % 10;
         }
     }
 }
