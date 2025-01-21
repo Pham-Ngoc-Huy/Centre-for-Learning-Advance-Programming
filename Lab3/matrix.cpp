@@ -120,6 +120,7 @@ Matrix Matrix::operator+(const Matrix& mat){
     int c = this->cols;
 
     Matrix C(r,c);
+    C.zeros();
 
     for (int i = 0; i < r; i++)
         for (int j = 0; j < c; j ++)
@@ -133,6 +134,7 @@ Matrix Matrix::operator-(const Matrix& mat){
     int c = this->cols;
 
     Matrix C(r,c);
+    C.zeros();
 
     for (int i = 0; i < r; i++)
         for (int j = 0; j < c; j ++)
@@ -144,7 +146,6 @@ Matrix& Matrix::operator=(const Matrix& mat) {
         cout<<"Matrix assignment error: Dimension mismatch"<<endl;
         return *this;
     }
-
     for (int i = 0; i < rows; i++) {
         for (int j = 0; j < cols; j++) {
             entry[i][j] = mat(i,j);
@@ -160,6 +161,7 @@ Matrix Matrix::operator*(const Matrix& mat){
     int n = this->cols; 
 
     Matrix C(r, c); 
+    C.zeros();
 
     for (int i = 0; i < r; i++) {
         for (int j = 0; j < c; j++) {
@@ -219,7 +221,9 @@ Matrix& Matrix::operator*=(const Matrix& mat) {
 Matrix Matrix::operator*(const double& alp){
     int r = this->rows;
     int c = this->cols; 
-    Matrix C(r, c); 
+    Matrix C(r, c);
+    C.zeros();
+
     for (int i = 0; i < r; i++) {
         for (int j = 0; j < c; j++) {
             C(i, j) += this->entry[i][j] * alp;
@@ -236,7 +240,7 @@ Vector Matrix::operator*(const Vector& vec) {
     int r = this->rows;
     int c = this->cols;
     Vector C(r); 
-
+    C.zeros();
     for (int i = 0; i < r; i++) {
         double sum = 0;
         for (int j = 0; j < c; j++) {
@@ -249,10 +253,11 @@ Vector Matrix::operator*(const Vector& vec) {
 
 Matrix Matrix::operator-() const {
     Matrix A(this->rows, this->cols);
+    A.zeros();
 
     for (int i = 0; i < this->rows; i++) {
         for (int j = 0; j < this->cols; j++) {
-            A.entry[i][j] = -(this->entry[i][j]);  
+            A(i,j) = -(this->entry[i][j]);  
         }
     }
     return A;  

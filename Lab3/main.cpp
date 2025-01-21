@@ -58,7 +58,4 @@ int main(){
     L3 = L1 + L2;
     // L3 = L1 + S1; // should return errors
     L3.print("L3");
-
-
-
 }
