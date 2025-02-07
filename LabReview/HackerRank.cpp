@@ -25,7 +25,6 @@ class Professor : public Person{
     public:
         //constructor
         Professor() : Person(), publications(0), cur_id(++id_professor) {} // Constructor mặc định
-
         Professor(const string& name_, const int& age_, const int& publications_): Person(name_, age_), publications(publications_){
             cur_id = ++id_professor;
         };
