@@ -1,4 +1,4 @@
 extern double y;
-void mult ( const double& x, const double c) {
+void mult ( const double& x, const double& c) {
    y = c * x;
 }

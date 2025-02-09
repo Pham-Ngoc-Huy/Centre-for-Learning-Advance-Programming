@@ -9,14 +9,14 @@ class Employee{
         int id;
     public:
         //constructor
-        Employee(): name(" "), id(0) {};
+        // Employee(): name(" "), id(0) {};
         Employee(const string& name_, const int& id_): name(name_), id(id_) {};
         virtual double calculateSalary() const = 0;
         virtual void display() const = 0;
         //destructor
         virtual ~Employee(){};
 };
-class FullTimeEmployee : public Employee{
+class FullTimeEmployee : virtual public Employee{
     protected:
         int monthlysalary;
     public:
@@ -24,7 +24,7 @@ class FullTimeEmployee : public Employee{
         double calculateSalary() const override;
         void display() const override;
 };
-class PartTimeEmployee : public Employee{
+class PartTimeEmployee : virtual public Employee{
     protected:
         int hourlywage;
         double hoursworked;
@@ -33,13 +33,11 @@ class PartTimeEmployee : public Employee{
         double calculateSalary() const override;
         void display() const override;
 };
-class Manager : public FullTimeEmployee, PartTimeEmployee{
+class Manager : public FullTimeEmployee, public PartTimeEmployee{
     protected:
     public:
-        double amount_bonus = PartTimeEmployee::calculateSalary();
-        double base_salary = FullTimeEmployee::calculateSalary();
-        Manager(const string& name_, int id_, double salary_, double wage_, double hours_)
-        : FullTimeEmployee(name_, id_, salary_), PartTimeEmployee(name_, id_, wage_, hours_) {}
+        Manager(const string& name_, int id_, double salary_, double wage_, double hours_):
+        Employee(name_, id_), FullTimeEmployee(name_,id_,salary_), PartTimeEmployee(name_,id_,wage_,hours_) {};
         double calculateSalary() const override;
         void display() const override;
 };

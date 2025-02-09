@@ -11,6 +11,8 @@ int main(){
     getline(cin,read);
     stringstream ss(read);
     while (getline(ss,num, ',')){ // get each element in an string "23,55,45" - seperate by ','
+    //The getline function is used with ss to extract substrings separated by ,.
+    //Each extracted substring is stored in num and added to numbers using push_back.
         numbers.push_back(num); //adding back to the vector
     }
     for (const string& i:numbers){ // loop for each element in vector

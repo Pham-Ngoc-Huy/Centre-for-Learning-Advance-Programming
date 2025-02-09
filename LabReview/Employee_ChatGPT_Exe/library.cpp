@@ -14,7 +14,7 @@ double PartTimeEmployee::calculateSalary() const {
     return hourlywage * hoursworked;
 }
 void PartTimeEmployee::display() const{
-    cout << "Hours Worked: "<<hoursworked<<", "<<"Hourly Wage:"<<"$"<<hourlywage
+    cout << "Hours Worked: "<<hoursworked<<", "<<"Hourly Wage: "<<"$"<<hourlywage
     <<"\nSalary: "<<"$"<<calculateSalary()<<endl;
 }
 double Manager::calculateSalary() const {

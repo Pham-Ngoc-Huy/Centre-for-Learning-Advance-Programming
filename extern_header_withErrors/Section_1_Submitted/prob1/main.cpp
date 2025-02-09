@@ -4,7 +4,7 @@ using namespace std;
 extern double x;
 extern double y;
 extern const double c;
-extern void mult ( const double& x, const double c);
+extern void mult ( const double& x, const double& c);
 
 int main () {
    {
